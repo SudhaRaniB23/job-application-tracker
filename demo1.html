@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sudha's Job Application Tracker</title>
+  <!-- Link to external CSS file -->
+  <link rel="stylesheet" href="styles.css">
+  
+</head>
+<body>
+
+<h1>My Job Application Tracker</h1>
+
+<div id="jobList">
+  <!-- Jobs will be displayed here -->
+</div>
+
+<h2>Add a New Job Application</h2>
+<form id="jobForm">
+  <label for="company">Company:</label>
+  <input type="text" id="company" name="company" required><br><br>
+  
+  <label for="role">Role:</label>
+  <input type="text" id="role" name="role" required><br><br>
+  
+  <label for="status">Status:</label>
+  <input type="text" id="status" name="status" required><br><br>
+
+  <button type="submit">Add Job</button>
+  <button type="reset">Remove</button>
+  
+</form>
+
+<script>
+  const jobs = [
+    { company: "Opentext", role: "Associate Software Developer", status: "Pending" },
+    { company: "Sensaria", role: "Software Developer 2", status: "Pending" },
+    { company: "RLA Engineering LLC", role: "Software Engineer", status: "Pending" },
+    { company: "Ellington Management Group", role: "Software Engineer", status: "Pending" },
+    { company: "ASRC Federal Holding", role: "Software Engineer", status: "Pending" },
+    { company: "Brunswick", role: "Software Engineer", status: "Rejected" },
+    { company: "MITEC Solutions", role: "Junior Software Developer", status: "Rejected" },
+    { company: "Komatsu", role: "Software Engineer", status: "Rejected" },
+    { company: "Amazon", role: "Data Intern", status: "Rejected" },
+    { company: "OSF", role: "Analytic Analyst", status: "Rejected" },
+    { company: "Cummins", role: "Software Engineer", status: "Rejected" },
+    { company: "Google", role: "Data Engineer Intern", status: "Rejected" },
+    { company: "Tyler Technology", role: "SQL Data Analyst", status: "Rejected" }
+  ];
+ // Function to display jobs on the webpage
+ function displayJobs() {
+    const jobListDiv = document.getElementById("jobList");
+    jobListDiv.innerHTML = "";
+    jobs.forEach((job, index) => {
+      const jobDiv = document.createElement("div");
+      jobDiv.classList.add("job");
+      jobDiv.innerHTML = `
+        <p><strong>Company:</strong> ${job.company}</p>
+        <p><strong>Role:</strong> ${job.role}</p>
+        <p><strong>Status:</strong> ${job.status}</p>
+        <button onclick="updateStatus(${index})">Update Status</button>
+      `;
+      jobListDiv.appendChild(jobDiv);
+    });
+  }
+
+  // Function to update job status
+  function updateStatus(index) {
+    const newStatus = prompt("Enter new status:");
+    if (newStatus !== null && newStatus.trim() !== "") {
+      jobs[index].status = newStatus;
+      displayJobs();
+    }
+  }
+
+  // Display initial jobs on page load
+  displayJobs();
+</script>
+
+</body>
+</html>
